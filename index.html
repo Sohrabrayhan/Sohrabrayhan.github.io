@@ -20,21 +20,38 @@
         /* 2. HEADER STYLES */
         header { text-align: center; margin-bottom: 60px; }
         
-        /* NEW: Profile Image Style */
         .profile-img {
-            width: 150px;       /* Size of the photo */
+            width: 150px;
             height: 150px;
-            border-radius: 50%; /* Makes it round */
-            border: 4px solid #238636; /* Green border */
-            object-fit: cover;  /* Ensures photo doesn't look squashed */
+            border-radius: 50%;
+            border: 4px solid #238636;
+            object-fit: cover;
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        h1 { font-size: 3em; color: #ffffff; margin-bottom: 10px; letter-spacing: -1px; }
-        .subtitle { font-size: 1.2em; color: #8b949e; margin-bottom: 30px; }
+        h1 { font-size: 3em; color: #ffffff; margin-bottom: 5px; letter-spacing: -1px; }
+        .subtitle { font-size: 1.2em; color: #8b949e; margin-bottom: 20px; }
         
-        .links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        /* NEW: Quote Generator Style */
+        .quote-container {
+            min-height: 60px; /* Keeps space so page doesn't jump */
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            border-left: 3px solid #58a6ff; /* Blue accent line */
+            background: rgba(88, 166, 255, 0.1); /* Very faint blue background */
+            display: inline-block;
+            border-radius: 0 8px 8px 0;
+            max-width: 80%;
+        }
+        #daily-quote {
+            font-style: italic;
+            color: #d2a8ff; /* Light Purple for quotes */
+            font-size: 1.1em;
+            font-family: 'Georgia', serif;
+        }
+
+        .links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
         .links a { 
             text-decoration: none; 
             color: #ffffff; 
@@ -102,6 +119,10 @@
         <h1>Md Sohrab Rayhan Avi</h1>
         <p class="subtitle">CSE Student | Backend Enthusiast | Based in Bangladesh</p>
         
+        <div class="quote-container">
+            <span id="daily-quote">Loading thought...</span>
+        </div>
+
         <div class="links">
             <a href="https://github.com/Sohrabrayhan" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/sohrab-rayhan/" target="_blank">LinkedIn</a>
@@ -179,6 +200,30 @@
     <footer>
         <p>&copy; 2026 Md Sohrab Rayhan Avi. Built with Code.</p>
     </footer>
+
+    <script>
+        // You can add as many quotes as you want here!
+        const quotes = [
+            "We are the stuff dreams are made on, and our little life is rounded with a sleep.",
+            "Man is least himself when he talks in his own person. Give him a mask, and he will tell you the truth.",
+            "And those who were seen dancing were thought to be insane by those who could not hear the music.",
+            "Code is poetry written for machines to understand.",
+            "Real integrity is doing the right thing, knowing that nobody's going to know whether you did it or not.",
+            "A dream you dream alone is only a dream. A dream you dream together is reality.",
+            "The individual has always had to struggle to keep from being overwhelmed by the tribe.",
+            "Nothing is True. Everything is Permitted.",
+            "Death is not the most significant loss in life. The greatest loss is what dies within us while we are alive.",
+            "Hope is a good thing, maybe the best of things, and no good thing ever dies.",
+            "People understand you from their level of perception, it is your responsibility to know exactly who you are and not get lost in what they are projecting onto you."
+        ];
+
+        // Logic to pick a random quote
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const selectedQuote = quotes[randomIndex];
+
+        // Insert into the page
+        document.getElementById('daily-quote').innerText = '"' + selectedQuote + '"';
+    </script>
 
 </body>
 </html>
