@@ -12,7 +12,7 @@
     <meta property="og:description" content="Check out my projects, LeetCode solutions, and technical blog.">
 
     <style>
-        
+        /* CSS VARIABLES */
         :root {
             --bg-color: #050505;
             --text-primary: #c9d1d9;
@@ -33,7 +33,7 @@
             --card-hover: #f3f4f6;
         }
 
-        
+        /* BASICS */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -48,7 +48,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        
+        /* TOP BAR */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -75,7 +75,7 @@
         }
         .theme-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
 
-        
+        /* QUOTE SECTION */
         .quote-box {
             margin-bottom: 50px;
             padding: 15px;
@@ -86,7 +86,7 @@
             font-style: italic;
         }
 
-        
+        /* PROFILE */
         .profile-container {
             display: flex;
             align-items: center;
@@ -118,7 +118,7 @@
         .verified-badge { width: 20px; height: 20px; }
         .subtitle { color: var(--text-secondary); font-size: 1em; margin-top: 5px; }
 
-        
+        /* SECTIONS */
         section { margin-top: 60px; }
         h2 { 
             font-size: 0.9em; 
@@ -128,7 +128,7 @@
             letter-spacing: 2px;
         }
 
-        
+        /* RESUME BUTTON */
         .resume-link {
             display: inline-block;
             margin-top: 15px;
@@ -148,7 +148,7 @@
         }
         .cmd-prompt { color: var(--accent-color); margin-right: 8px; font-weight: bold; }
 
-        
+        /* LISTS */
         ul { list-style: none; }
         li { margin-bottom: 15px; }
 
@@ -171,7 +171,7 @@
         .work-link:hover { border-bottom-color: var(--accent-color); color: var(--accent-color); }
         .date-tag { font-size: 0.85em; color: var(--text-secondary); }
 
-        
+        /* GITHUB GRAPH */
         .github-graph {
             margin-top: 20px; 
             border: 1px solid var(--border-color); 
@@ -190,7 +190,7 @@
             text-align: right; display: flex; justify-content: space-between;
         }
 
-        
+        /* SOCIAL LINKS */
         .social-row {
             display: flex; justify-content: space-between; align-items: center;
             text-decoration: none; color: var(--text-secondary); padding: 12px 0;
@@ -204,7 +204,7 @@
         svg { width: 18px; height: 18px; fill: currentColor; }
         .arrow-icon { width: 14px; height: 14px; transform: rotate(-45deg); }
 
-        
+        /* MOVIE LOG STYLES */
         .movie-row {
             display: flex; 
             justify-content: space-between; 
@@ -215,6 +215,29 @@
         }
         .movie-row:hover { background-color: var(--quote-bg); padding-left: 10px; border-radius: 4px;}
         .movie-rating { color: var(--accent-color); font-size: 0.9em; letter-spacing: 1px; }
+
+        /* BLOG NOTIFICATION TOAST (NEW) */
+        .blog-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--card-hover);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px 20px;
+            border-radius: 4px;
+            max-width: 320px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(150%);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 9999;
+        }
+        .blog-toast.show { transform: translateY(0); opacity: 1; }
+        .toast-header { color: var(--accent-color); font-weight: bold; font-size: 0.85em; margin-bottom: 5px; letter-spacing: 1px; }
+        .toast-close { position: absolute; top: 10px; right: 12px; cursor: pointer; font-size: 0.8em; color: var(--text-secondary); }
+        .toast-close:hover { color: #fff; }
+        .toast-btn { display: inline-block; margin-top: 8px; font-size: 0.85em; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--accent-color); }
 
     </style>
 </head>
@@ -366,8 +389,18 @@
         </div>
     </section>
 
+    <div id="blog-notification" class="blog-toast">
+        <div class="toast-close" onclick="closeToast()">[x]</div>
+        <div class="toast-header">//! NEW LOG DETECTED</div>
+        <div style="font-size: 0.9em; color: var(--text-secondary);">
+            "Git Good: A No-Nonsense Guide to GitHub"
+            <br>
+            <a href="blog.html" class="toast-btn">Read entry_01.txt &rarr;</a>
+        </div>
+    </div>
+
     <script>
-        
+        // THEME
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById("theme-icon");
@@ -382,7 +415,7 @@
         }
         if (localStorage.getItem("theme") === "light") toggleTheme();
 
-        
+        // CLOCK
         function updateTime() {
             const now = new Date();
             const time = now.toLocaleTimeString('en-US', { hour12: false });
@@ -392,7 +425,7 @@
         }
         setInterval(updateTime, 1000); updateTime();
 
-        
+        // WEATHER
         async function fetchWeather() {
             try {
                 const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.81&longitude=90.41&current_weather=true');
@@ -402,7 +435,7 @@
         }
         fetchWeather();
 
-        
+        // QUOTES
         const quotes = [
             "We are the stuff dreams are made on, and our little life is rounded with a sleep.",
             "Man is least himself when he talks in his own person. Give him a mask, and he will tell you the truth.",
@@ -417,10 +450,19 @@
         ];
         document.getElementById('daily-quote').innerText = "> " + quotes[Math.floor(Math.random() * quotes.length)];
 
-        
+        // LATENCY
         window.onload = function() {
             const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
             document.getElementById('latency').innerText = `Latency: ${loadTime}ms`;
+
+            // BLOG TOAST LOGIC (2.5s delay)
+            setTimeout(function() {
+                document.getElementById('blog-notification').classList.add('show');
+            }, 2500);
+        }
+
+        function closeToast() {
+            document.getElementById('blog-notification').classList.remove('show');
         }
     </script>
 </body>
