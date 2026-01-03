@@ -3,226 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Md Sohrab Rayhan Avi - Portfolio</title>
+    <title>Md Sohrab Rayhan Avi</title>
     <style>
-        /* 1. RESET AND FONTS */
+        /* 1. THE TERMINAL RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            line-height: 1.6; 
-            background-color: #0d1117; 
-            color: #c9d1d9; 
-            max-width: 900px; 
+            background-color: #050505; /* Almost pure black */
+            color: #e0e0e0;            /* Off-white for readability */
+            font-family: 'Courier New', Courier, monospace; /* The "Hacker" font */
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 680px;          /* Narrow width like a document */
             margin: 0 auto; 
-            padding: 40px 20px; 
+            padding: 60px 20px; 
         }
 
-        /* 2. HEADER STYLES */
-        header { text-align: center; margin-bottom: 60px; }
-        
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 4px solid #238636;
-            object-fit: cover;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        h1 { font-size: 3em; color: #ffffff; margin-bottom: 5px; letter-spacing: -1px; }
-        .subtitle { font-size: 1.2em; color: #8b949e; margin-bottom: 20px; }
-        
-        /* NEW: Quote Generator Style */
-        .quote-container {
-            min-height: 60px; /* Keeps space so page doesn't jump */
-            margin-bottom: 30px;
-            padding: 10px 20px;
-            border-left: 3px solid #58a6ff; /* Blue accent line */
-            background: rgba(88, 166, 255, 0.1); /* Very faint blue background */
-            display: inline-block;
-            border-radius: 0 8px 8px 0;
-            max-width: 80%;
-        }
-        #daily-quote {
-            font-style: italic;
-            color: #d2a8ff; /* Light Purple for quotes */
-            font-size: 1.1em;
-            font-family: 'Georgia', serif;
-        }
-
-        .links { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
-        .links a { 
-            text-decoration: none; 
-            color: #ffffff; 
-            background-color: #21262d; 
-            padding: 10px 20px; 
-            border-radius: 6px; 
-            border: 1px solid #30363d;
-            transition: all 0.2s ease;
-            font-weight: 600;
-        }
-        .links a:hover { 
-            background-color: #238636; 
-            border-color: #2ea043;
-            transform: translateY(-2px);
-        }
-
-        /* 3. SECTION STYLES */
-        section { margin-bottom: 50px; }
-        h2 { 
-            border-bottom: 2px solid #30363d; 
-            padding-bottom: 10px; 
-            margin-bottom: 25px; 
-            color: #58a6ff; 
-        }
-        p { margin-bottom: 15px; font-size: 1.1em; color: #8b949e; }
-
-        /* 4. CARDS */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        
-        .card { 
-            background-color: #161b22; 
-            border: 1px solid #30363d; 
-            padding: 20px; 
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-        .card:hover { transform: translateY(-5px); border-color: #58a6ff; }
-        .card h3 { color: #c9d1d9; margin-bottom: 10px; }
-        
-        .course-card { 
-            background: linear-gradient(145deg, #161b22, #1c2128);
-            border-left: 5px solid #238636; 
-            padding: 25px;
-            border-radius: 8px;
-        }
-        .course-card ul { margin-left: 20px; margin-top: 10px; color: #8b949e; }
-        
-        .project-link { 
-            display: inline-block; 
-            margin-top: 10px; 
-            color: #58a6ff; 
-            text-decoration: none; 
+        /* 2. TYPOGRAPHY */
+        h1 { 
+            font-size: 2.2em; 
             font-weight: bold; 
+            margin-bottom: 5px; 
+            letter-spacing: -1px; 
+            color: #ffffff;
         }
-        .project-link:hover { text-decoration: underline; }
+        
+        h2 { 
+            font-size: 1.2em; 
+            text-transform: uppercase; 
+            border-bottom: 1px solid #333; 
+            padding-bottom: 5px; 
+            margin-top: 50px; 
+            margin-bottom: 20px; 
+            letter-spacing: 1px;
+            color: #888;
+        }
 
-        footer { text-align: center; margin-top: 80px; font-size: 0.9em; color: #484f58; }
+        p { margin-bottom: 15px; }
+        
+        /* 3. LINKS (The "Soren" Style) */
+        a { 
+            color: #fff; 
+            text-decoration: none; 
+            border-bottom: 1px solid #444; 
+            transition: all 0.2s;
+        }
+        a:hover { 
+            background-color: #fff; 
+            color: #000; 
+            border-bottom: none;
+        }
+
+        /* 4. LISTS (Skills & Projects) */
+        ul { list-style-type: none; }
+        li { margin-bottom: 10px; }
+        
+        .date { 
+            float: right; 
+            color: #666; 
+            font-size: 0.9em; 
+        }
+        
+        /* Clear floats */
+        .clearfix::after { content: ""; clear: both; display: table; }
+
+        /* 5. IMAGE (Small and round) */
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            filter: grayscale(100%); /* Black and white photo */
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* 6. QUOTE SECTION */
+        #daily-quote {
+            display: block;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px dashed #333;
+            font-style: italic;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        /* Navigation List */
+        .nav-list { margin-top: 20px; margin-bottom: 40px; }
+        .nav-list a { margin-right: 15px; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <img src="profile.jpg" alt="Md Sohrab Rayhan Avi" class="profile-img">
+        <img src="profile.jpg" alt="Profile" class="avatar">
+        <h1>Md Sohrab Rayhan Avi.</h1>
+        <p style="color: #888;">Backend Engineer & CSE Student.</p>
         
-        <h1>Md Sohrab Rayhan Avi</h1>
-        <p class="subtitle">CSE Student | Backend Enthusiast | Based in Bangladesh</p>
-        
-        <div class="quote-container">
-            <span id="daily-quote">Loading thought...</span>
-        </div>
-
-        <div class="links">
+        <div class="nav-list">
             <a href="https://github.com/Sohrabrayhan" target="_blank">GitHub</a>
             <a href="https://www.linkedin.com/in/sohrab-rayhan/" target="_blank">LinkedIn</a>
-            <a href="mailto:sohrabrayhan45@gmail.com">Email Me</a>
-            <a href="https://www.instagram.com/rayhan_ovi.exe/" target="_blank">Instagram</a>
+            <a href="mailto:sohrabrayhan45@gmail.com">Email</a>
+            <a href="blog.html">Blog</a>
         </div>
     </header>
 
     <section>
-        <h2>About Me</h2>
+        <h2>01. About</h2>
         <p>
-            Hello! I am a Computer Science student passionate about backend engineering. 
-            I focus on the logic behind the screen—building scalable systems using Python, AWS, and Microservices architecture.
-            I am currently preparing for a career abroad by mastering Data Structures & Algorithms.
+            I build the logic behind the screen. Currently studying Computer Science in Bangladesh. 
+            Obsessed with scalable systems, Python, and the raw efficiency of C.
+        </p>
+        <p>
+            My goal is to engineer backend architectures that can handle millions of requests, 
+            moving beyond simple coding to true system design.
         </p>
     </section>
 
     <section>
-        <h2>Technical Skills</h2>
-        <div class="grid-container">
-            
-            <div class="card">
-                <h3>🧠 C Programming</h3>
-                <p>My foundation. Expert in pointers, memory management, and low-level logic.</p>
-            </div>
-
-            <div class="card">
-                <h3>☕ Java (OOP)</h3>
-                <p>Strong understanding of Object-Oriented principles: Inheritance & Polymorphism.</p>
-            </div>
-
-            <div class="card">
-                <h3>🐍 Python & Backend</h3>
-                <p>Building APIs with FastAPI, managing Databases, and solving LeetCode problems.</p>
-            </div>
-
-        </div>
+        <h2>02. Stack</h2>
+        <ul>
+            <li>> <strong>Python</strong> (FastAPI, Django)</li>
+            <li>> <strong>C / Java</strong> (Memory Mgmt, OOP)</li>
+            <li>> <strong>Cloud</strong> (AWS, Docker, Microservices)</li>
+            <li>> <strong>Databases</strong> (PostgreSQL, MySQL)</li>
+        </ul>
     </section>
 
     <section>
-        <h2>Current Learning Path</h2>
-        <div class="course-card">
-            <h3>🚀 Advanced Backend Engineering & Cloud Architecture</h3>
-            <p style="font-size: 0.9em; color: #8b949e; margin-bottom: 15px;">
-                <strong>Focus:</strong> System Design, Cloud Infrastructure, & APIs | <strong>Status:</strong> In Progress
-            </p>
-            <p>A 12-month intensive career track covering advanced concepts:</p>
-            <ul>
-                <li><strong>DSA:</strong> Solving real-world problems efficiently.</li>
-                <li><strong>System Design:</strong> Microservices, Docker, and AWS Cloud.</li>
-                <li><strong>Backend:</strong> Scalable APIs using Python.</li>
-            </ul>
+        <h2>03. Learning</h2>
+        <div class="clearfix">
+            <strong>Advanced Backend Engineering</strong>
+            <span class="date">In Progress</span>
         </div>
+        <p style="font-size: 0.9em; color: #888; margin-top: 5px;">
+            Focusing on Data Structures, System Design, and Cloud Architecture.
+        </p>
     </section>
 
     <section>
-        <h2>Projects</h2>
-        <div class="grid-container">
+        <h2>04. Work</h2>
+        
+        <ul>
+            <li>
+                <div class="clearfix">
+                    <a href="https://github.com/Sohrabrayhan/LeetCode-Solutions">LeetCode Solutions</a>
+                    <span class="date">Ongoing</span>
+                </div>
+                <p style="font-size: 0.9em; color: #888; margin-top: 5px;">
+                    Optimized Python solutions focusing on O(n) complexity.
+                </p>
+            </li>
             
-            <div class="card">
-                <h3>📂 LeetCode Solutions</h3>
-                <p>A structured repository of my daily algorithm practice, focusing on time complexity optimization.</p>
-                <a href="https://github.com/Sohrabrayhan/LeetCode-Solutions" class="project-link" target="_blank">View Code →</a>
-            </div>
-
-            <div class="card">
-                <h3>🚧 Portfolio Website</h3>
-                <p>This website! Built from scratch using HTML5, CSS3, and deployed via GitHub Pages.</p>
-                <a href="#" class="project-link">You are here</a>
-            </div>
-
-        </div>
+            <li>
+                <div class="clearfix">
+                    <a href="#">Portfolio V1</a>
+                    <span class="date">2026</span>
+                </div>
+                <p style="font-size: 0.9em; color: #888; margin-top: 5px;">
+                    Minimalist personal site hosted on GitHub Pages.
+                </p>
+            </li>
+        </ul>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Md Sohrab Rayhan Avi. Built with Code.</p>
+    <div id="daily-quote">
+        Loading...
+    </div>
+
+    <footer style="margin-top: 80px; color: #444; font-size: 0.8em;">
+        EOF.
     </footer>
 
     <script>
-        // You can add as many quotes as you want here!
         const quotes = [
-            "We are the stuff dreams are made on, and our little life is rounded with a sleep.",
-            "Man is least himself when he talks in his own person. Give him a mask, and he will tell you the truth.",
-            "And those who were seen dancing were thought to be insane by those who could not hear the music.",
-            "Code is poetry written for machines to understand.",
-            "Real integrity is doing the right thing, knowing that nobody's going to know whether you did it or not.",
-            "A dream you dream alone is only a dream. A dream you dream together is reality.",
-            "The individual has always had to struggle to keep from being overwhelmed by the tribe.",
-            "Nothing is True. Everything is Permitted.",
-            "Death is not the most significant loss in life. The greatest loss is what dies within us while we are alive.",
-            "Hope is a good thing, maybe the best of things, and no good thing ever dies.",
-            "People understand you from their level of perception, it is your responsibility to know exactly who you are and not get lost in what they are projecting onto you."
+            "We are the stuff dreams are made on.",
+            "Code is poetry written for machines.",
+            "Real integrity is doing the right thing, knowing that nobody's going to know.",
+            "Talk is cheap. Show me the code.",
+            "Simplicity is the ultimate sophistication."
         ];
-
-        // Logic to pick a random quote
         const randomIndex = Math.floor(Math.random() * quotes.length);
-        const selectedQuote = quotes[randomIndex];
-
-        // Insert into the page
-        document.getElementById('daily-quote').innerText = '"' + selectedQuote + '"';
+        document.getElementById('daily-quote').innerText = "> " + quotes[randomIndex];
     </script>
 
 </body>
