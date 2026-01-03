@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git for Humans - Sohrab Rayhan</title>
+    <link rel="icon" href="check-mark.png" type="image/png">
+
+    <style>
+        
+        :root {
+            --bg-color: #050505;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --border-color: #21262d;
+            --accent-color: #1d9bf0;
+            --quote-bg: rgba(29, 155, 240, 0.1);
+            --code-bg: #161b22;
+            --success-color: #238636;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-primary: #1f2328;
+            --text-secondary: #656d76;
+            --border-color: #d0d7de;
+            --accent-color: #0969da;
+            --quote-bg: #f6f8fa;
+            --code-bg: #f6f8fa;
+        }
+
+        
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-primary);            
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 680px;          
+            margin: 0 auto; 
+            padding: 40px 20px;
+            transition: 0.3s;
+        }
+
+        a { color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color); transition: 0.2s; }
+        a:hover { color: var(--accent-color); border-bottom-color: var(--accent-color); }
+
+        
+        .nav-bar { margin-bottom: 60px; font-size: 0.9em; }
+        .back-link { color: var(--text-secondary); }
+        .back-link:hover { color: var(--text-primary); }
+
+        
+        h1 { font-size: 1.8em; margin-bottom: 10px; line-height: 1.3; }
+        .meta-info { color: var(--text-secondary); font-size: 0.85em; margin-bottom: 40px; display: flex; gap: 15px; align-items: center;}
+        
+        h2 { margin-top: 40px; margin-bottom: 15px; font-size: 1.2em; color: var(--text-primary); border-left: 3px solid var(--accent-color); padding-left: 10px; }
+        p { margin-bottom: 20px; color: var(--text-secondary); }
+        
+       
+        blockquote {
+            background: var(--quote-bg);
+            border-left: 3px solid var(--accent-color);
+            margin: 20px 0;
+            padding: 15px;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+
+        
+        pre {
+            background: var(--code-bg);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        code { font-family: 'Courier New', Courier, monospace; color: var(--accent-color); }
+
+        /* 5. INTERACTIVE FOOTER */
+        .post-footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .share-btn {
+            background: var(--code-bg);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        .share-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
+        
+        
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: var(--success-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9em;
+        }
+        #toast.show { visibility: visible; -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a href="index.html" class="back-link">← cd .. (Home)</a>
+    </div>
+
+    <article>
+        <h1>Git Good: A No-Nonsense Guide to GitHub</h1>
+        
+        <div class="meta-info">
+            <span>📅 Jan 03, 2026</span>
+            <span>•</span>
+            <span>⏱️ 4 min read</span>
+            <span>•</span>
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fsohrabrayhan.github.io%2Fblog.html&count_bg=%231D9BF0&title_bg=%23050505&icon=&icon_color=%23E7E7E7&title=reads&edge_flat=false" alt="Views"/>
+        </div>
+
+        <p>
+            Welcome to the Matrix. Just kidding, it's just <code>Git</code>. But when you are a beginner, typing commands into a black terminal window feels exactly like hacking the Pentagon.
+        </p>
+        <p>
+            If you are tired of naming your folders <code>final_project_v2_REALLY_FINAL.zip</code>, this guide is for you.
+        </p>
+
+        <h2>Step 1: The Setup (The Boring Part)</h2>
+        <p>
+            First, you need a GitHub account. It's like Facebook for nerds, but instead of arguing about politics, we argue about code indentation.
+        </p>
+        <blockquote>
+            <strong>Pro Tip:</strong> Pick a professional username. You will regret <code>cool_dude_69</code> when you are applying for jobs.
+        </blockquote>
+
+        <h2>Step 2: The Holy Trinity of Commands</h2>
+        <p>
+            Git basically has three commands you will use 99% of the time. Think of it like online shopping:
+        </p>
+
+        <p><strong>1. git add .</strong></p>
+        <p>This puts your changes in the shopping cart. You haven't bought them yet, you're just saying "I want this."</p>
+        <pre><code>$ git add .</code></pre>
+
+        <p><strong>2. git commit -m "message"</strong></p>
+        <p>This is the checkout button. You are buying the changes. The message is your receipt.</p>
+        <pre><code>$ git commit -m "Fixed the bug (I hope)"</code></pre>
+
+        <p><strong>3. git push</strong></p>
+        <p>This sends the delivery truck to the cloud. Until you do this, the code only exists on your laptop.</p>
+        <pre><code>$ git push origin main</code></pre>
+
+        <h2>Step 3: When Things Go Wrong</h2>
+        <p>
+            Eventually, you will see a scary red message called a <code>Merge Conflict</code>. 
+            This just means you and your friend edited the same line of code at the same time.
+        </p>
+        <p>
+            Don't panic. Drink some water. Or just delete the repository and start over. (Okay, don't actually do that, but we've all thought about it).
+        </p>
+
+        <h2>Conclusion</h2>
+        <p>
+            That's it. You are now a Git Wizard. Go forth and commit code. Just don't push your passwords to the public internet, please.
+        </p>
+    </article>
+
+    <div class="post-footer">
+        <button onclick="copyLink()" class="share-btn">
+            🔗 Copy Link to Share
+        </button>
+
+        <div style="font-size: 0.8em; color: #666;">
+            EOF.
+        </div>
+    </div>
+
+    <div id="toast">Link copied to clipboard!</div>
+
+    <script>
+        
+        if (localStorage.getItem("theme") === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
+
+        
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href);
+            var x = document.getElementById("toast");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+
+</body>
+</html>
