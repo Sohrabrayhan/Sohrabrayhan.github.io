@@ -142,7 +142,7 @@
         }
         .cmd-prompt { color: var(--accent-color); margin-right: 8px; font-weight: bold; }
         
-        /* IMPROVED CURSOR ANIMATION */
+        
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         
         .cursor {
@@ -151,17 +151,17 @@
             animation: blink 1s step-end infinite;
             vertical-align: middle;
             margin-left: 2px;
-            box-shadow: 0 0 8px var(--accent-color); /* GLOW EFFECT */
+            box-shadow: 0 0 8px var(--accent-color); 
         }
         
-        /* Block cursor for Title (Retro Style) */
+        
         .title-cursor { 
             height: 1.1em; 
             width: 10px; 
             margin-bottom: -2px;
         }
         
-        /* Underscore cursor for Quote (Readable Style) */
+       
         .quote-cursor { 
             height: 3px; 
             width: 10px; 
@@ -208,7 +208,7 @@
             text-align: right; display: flex; justify-content: space-between;
         }
 
-        /* POP-UP EFFECT */
+        
         .social-row {
             display: flex; justify-content: space-between; align-items: center;
             text-decoration: none; color: var(--text-secondary); padding: 12px 10px;
@@ -307,7 +307,7 @@
     <section>
         <h2>01. About</h2>
         <p>
-            CSE Student & Backend Engineer. I build scalable systems using Python and C.
+            CSE Student & Backend Engineer.I build scalable systems using Python and C.
             Currently focused on Data Structures and Cloud Architecture.
         </p>
         <a href="resume.pdf" target="_blank" class="resume-link">
@@ -332,7 +332,7 @@
             <span class="date-tag">Completed</span>
         </div>
         <p style="font-size: 0.9em; color: var(--text-secondary); margin-top: 5px; margin-bottom: 15px;">
-            Built a multi-threaded TCP server in Python implementing the Redis Protocol (RESP) on port 6379.
+            Built a multi-threaded TCP server in Python implementing the Redis Protocol (RESP)
         </p>
 
         <div class="work-item">
@@ -449,7 +449,7 @@
     </div>
 
     <script>
-        // THEME & UTILS
+        
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById("theme-icon");
@@ -507,8 +507,7 @@
             "Every lie we tell incurs a debt to the truth. Sooner or later, that debt is paid."
         ];
         
-        // HUMAN-LIKE TYPEWRITER FUNCTION
-        // Uses variable random speeds to simulate real typing
+        
         function typeWriterEffect(elementId, text, baseSpeed) {
             let i = 0;
             const element = document.getElementById(elementId);
@@ -519,8 +518,7 @@
                     element.innerHTML += text.charAt(i);
                     i++;
                     
-                    // Randomize delay: Base speed + random variation (0 to 50ms)
-                    // Occasionally pause longer for spaces (simulating thinking)
+                   
                     let delay = baseSpeed + Math.random() * 50;
                     if (text.charAt(i-1) === ' ') delay += 50; 
                     
@@ -531,23 +529,23 @@
         }
 
         window.onload = function() {
-            // Stats
+           
             const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
             document.getElementById('latency').innerText = `Latency: ${loadTime}ms`;
             fetchGitHubStats();
 
-            // 1. Start Title Typing (Fast but human)
+           
             setTimeout(() => {
                 typeWriterEffect("typewriter", "Backend Engineer (Loading...)", 80);
             }, 500);
 
-            // 2. Start Quote Typing (Slower, easy to read)
+            
             const randomQuote = "> " + quotes[Math.floor(Math.random() * quotes.length)];
             setTimeout(() => {
                 typeWriterEffect("quote-text", randomQuote, 40);
             }, 1000);
 
-            // Blog Toast
+            
             setTimeout(function() {
                 document.getElementById('blog-notification').classList.add('show');
             }, 3500); 
