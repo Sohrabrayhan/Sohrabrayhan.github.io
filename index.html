@@ -12,7 +12,6 @@
     <meta property="og:description" content="Check out my projects, LeetCode solutions, and technical blog.">
 
     <style>
-        /* CSS VARIABLES */
         :root {
             --bg-color: #050505;
             --text-primary: #c9d1d9;
@@ -33,7 +32,6 @@
             --card-hover: #f3f4f6;
         }
 
-        /* BASICS */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
@@ -48,7 +46,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* TOP BAR */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -75,7 +72,6 @@
         }
         .theme-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
 
-        /* QUOTE SECTION */
         .quote-box {
             margin-bottom: 50px;
             padding: 15px;
@@ -84,9 +80,9 @@
             font-size: 0.9em;
             color: var(--text-secondary);
             font-style: italic;
+            min-height: 60px;
         }
 
-        /* PROFILE */
         .profile-container {
             display: flex;
             align-items: center;
@@ -116,9 +112,8 @@
             gap: 8px;
         }
         .verified-badge { width: 20px; height: 20px; }
-        .subtitle { color: var(--text-secondary); font-size: 1em; margin-top: 5px; }
+        .subtitle { color: var(--text-secondary); font-size: 1em; margin-top: 5px; min-height: 24px;}
 
-        /* SECTIONS */
         section { margin-top: 60px; }
         h2 { 
             font-size: 0.9em; 
@@ -128,7 +123,6 @@
             letter-spacing: 2px;
         }
 
-        /* RESUME BUTTON */
         .resume-link {
             display: inline-block;
             margin-top: 15px;
@@ -147,8 +141,33 @@
             transform: translateY(-2px);
         }
         .cmd-prompt { color: var(--accent-color); margin-right: 8px; font-weight: bold; }
+        
+        /* IMPROVED CURSOR ANIMATION */
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        
+        .cursor {
+            display: inline-block;
+            background-color: var(--accent-color);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+            box-shadow: 0 0 8px var(--accent-color); /* GLOW EFFECT */
+        }
+        
+        /* Block cursor for Title (Retro Style) */
+        .title-cursor { 
+            height: 1.1em; 
+            width: 10px; 
+            margin-bottom: -2px;
+        }
+        
+        /* Underscore cursor for Quote (Readable Style) */
+        .quote-cursor { 
+            height: 3px; 
+            width: 10px; 
+            margin-bottom: 2px;
+        }
 
-        /* LISTS */
         ul { list-style: none; }
         li { margin-bottom: 15px; }
 
@@ -171,7 +190,6 @@
         .work-link:hover { border-bottom-color: var(--accent-color); color: var(--accent-color); }
         .date-tag { font-size: 0.85em; color: var(--text-secondary); }
 
-        /* GITHUB GRAPH */
         .github-graph {
             margin-top: 20px; 
             border: 1px solid var(--border-color); 
@@ -190,13 +208,22 @@
             text-align: right; display: flex; justify-content: space-between;
         }
 
-        /* SOCIAL LINKS */
+        /* POP-UP EFFECT */
         .social-row {
             display: flex; justify-content: space-between; align-items: center;
-            text-decoration: none; color: var(--text-secondary); padding: 12px 0;
-            border-bottom: 1px solid var(--border-color); transition: all 0.2s;
+            text-decoration: none; color: var(--text-secondary); padding: 12px 10px;
+            border-bottom: 1px solid var(--border-color); 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin: 0 -10px;
+            border-radius: 8px;
         }
-        .social-row:hover { color: var(--text-primary); border-bottom-color: var(--accent-color); }
+        .social-row:hover { 
+            color: var(--text-primary); 
+            border-bottom-color: transparent;
+            background-color: var(--card-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
         .social-left { display: flex; align-items: center; gap: 12px; font-size: 1em; }
         .social-right { display: flex; align-items: center; gap: 10px; font-size: 0.9em; color: var(--text-secondary); }
         .social-row:hover .social-right { color: var(--text-primary); }
@@ -204,7 +231,6 @@
         svg { width: 18px; height: 18px; fill: currentColor; }
         .arrow-icon { width: 14px; height: 14px; transform: rotate(-45deg); }
 
-        /* MOVIE LOG STYLES */
         .movie-row {
             display: flex; 
             justify-content: space-between; 
@@ -216,7 +242,6 @@
         .movie-row:hover { background-color: var(--quote-bg); padding-left: 10px; border-radius: 4px;}
         .movie-rating { color: var(--accent-color); font-size: 0.9em; letter-spacing: 1px; }
 
-        /* BLOG NOTIFICATION TOAST (NEW) */
         .blog-toast {
             position: fixed;
             bottom: 30px;
@@ -238,7 +263,6 @@
         .toast-close { position: absolute; top: 10px; right: 12px; cursor: pointer; font-size: 0.8em; color: var(--text-secondary); }
         .toast-close:hover { color: #fff; }
         .toast-btn { display: inline-block; margin-top: 8px; font-size: 0.85em; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--accent-color); }
-
     </style>
 </head>
 <body>
@@ -260,7 +284,7 @@
     </div>
 
     <div class="quote-box">
-        <span id="daily-quote">Loading thought...</span>
+        <span id="quote-text"></span><span class="cursor quote-cursor"></span>
     </div>
 
     <div class="profile-container">
@@ -273,7 +297,10 @@
                 Sohrab Rayhan
                 <img src="check-mark.png" alt="Verified" class="verified-badge">
             </h1>
-            <p class="subtitle">Software Engineer (Backend)</p>
+            
+            <p class="subtitle">
+                <span id="typewriter"></span><span class="cursor title-cursor"></span>
+            </p>
         </div>
     </div>
 
@@ -284,7 +311,7 @@
             Currently focused on Data Structures and Cloud Architecture.
         </p>
         <a href="resume.pdf" target="_blank" class="resume-link">
-            <span class="cmd-prompt">$</span> ./download_resume.pdf
+            <span class="cmd-prompt">$</span> ./download_resume.pdf<span class="cursor quote-cursor"></span>
         </a>
     </section>
 
@@ -349,6 +376,16 @@
         
         <div class="movie-row">
             <div>
+                <span style="color: var(--text-primary);">Elio</span>
+            </div>
+            <div style="text-align: right;">
+                <span class="movie-rating">★★★★☆</span>
+                <span class="date-tag" style="margin-left: 10px;">Jan 05</span>
+            </div>
+        </div>
+
+        <div class="movie-row">
+            <div>
                 <span style="color: var(--text-primary);">Zootopia 2</span>
             </div>
             <div style="text-align: right;">
@@ -374,7 +411,7 @@
         <div class="github-graph">
             <img src="https://ghchart.rshah.org/238636/Sohrabrayhan" alt="Sohrab's Github Chart" class="graph-img">
             <div class="graph-footer">
-                <span>Total Contributions: Loading...</span><span>Currently touching grass</span>
+                <span id="contrib-text">Total Contributions: Loading...</span><span>Currently touching grass</span>
             </div>
         </div>
     </section>
@@ -412,7 +449,7 @@
     </div>
 
     <script>
-        // THEME
+        // THEME & UTILS
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById("theme-icon");
@@ -427,7 +464,6 @@
         }
         if (localStorage.getItem("theme") === "light") toggleTheme();
 
-        // CLOCK
         function updateTime() {
             const now = new Date();
             const time = now.toLocaleTimeString('en-US', { hour12: false });
@@ -437,7 +473,6 @@
         }
         setInterval(updateTime, 1000); updateTime();
 
-        // WEATHER
         async function fetchWeather() {
             try {
                 const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.81&longitude=90.41&current_weather=true');
@@ -447,7 +482,18 @@
         }
         fetchWeather();
 
-        // QUOTES
+        async function fetchGitHubStats() {
+            try {
+                const res = await fetch('https://github-contributions-api.jogruber.de/v4/Sohrabrayhan');
+                if (!res.ok) throw new Error('API down');
+                const data = await res.json();
+                const total = Object.values(data.total).reduce((acc, curr) => acc + curr, 0);
+                document.getElementById('contrib-text').innerText = `Total Contributions: ${total}`;
+            } catch (e) {
+                document.getElementById('contrib-text').innerText = "Total Contributions: 500+"; 
+            }
+        }
+
         const quotes = [
             "We are the stuff dreams are made on, and our little life is rounded with a sleep.",
             "Man is least himself when he talks in his own person. Give him a mask, and he will tell you the truth.",
@@ -460,17 +506,51 @@
             "So full of stars and everybody wants to shine. But the stars don't shine. They burn.",
             "Every lie we tell incurs a debt to the truth. Sooner or later, that debt is paid."
         ];
-        document.getElementById('daily-quote').innerText = "> " + quotes[Math.floor(Math.random() * quotes.length)];
+        
+        // HUMAN-LIKE TYPEWRITER FUNCTION
+        // Uses variable random speeds to simulate real typing
+        function typeWriterEffect(elementId, text, baseSpeed) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            element.innerHTML = ""; 
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    
+                    // Randomize delay: Base speed + random variation (0 to 50ms)
+                    // Occasionally pause longer for spaces (simulating thinking)
+                    let delay = baseSpeed + Math.random() * 50;
+                    if (text.charAt(i-1) === ' ') delay += 50; 
+                    
+                    setTimeout(type, delay);
+                }
+            }
+            type();
+        }
 
-        // LATENCY
         window.onload = function() {
+            // Stats
             const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
             document.getElementById('latency').innerText = `Latency: ${loadTime}ms`;
+            fetchGitHubStats();
 
-            // BLOG TOAST LOGIC (2.5s delay)
+            // 1. Start Title Typing (Fast but human)
+            setTimeout(() => {
+                typeWriterEffect("typewriter", "Backend Engineer (Loading...)", 80);
+            }, 500);
+
+            // 2. Start Quote Typing (Slower, easy to read)
+            const randomQuote = "> " + quotes[Math.floor(Math.random() * quotes.length)];
+            setTimeout(() => {
+                typeWriterEffect("quote-text", randomQuote, 40);
+            }, 1000);
+
+            // Blog Toast
             setTimeout(function() {
                 document.getElementById('blog-notification').classList.add('show');
-            }, 2500);
+            }, 3500); 
         }
 
         function closeToast() {
