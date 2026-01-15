@@ -7,6 +7,8 @@
     
     <link rel="icon" href="check-mark.png" type="image/png">
     
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <meta name="description" content="Portfolio of Sohrab Rayhan - Backend Engineer & CSE Student.">
     <meta property="og:title" content="Sohrab Rayhan | Backend Engineer">
     <meta property="og:description" content="Check out my projects, LeetCode solutions, and technical blog.">
@@ -44,6 +46,7 @@
             margin: 0 auto; 
             padding: 40px 20px;
             transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden; /* Prevents scrollbar flash during animation */
         }
 
         .top-bar {
@@ -89,21 +92,43 @@
             gap: 20px;
             margin-bottom: 50px;
         }
-        .avatar-wrapper { position: relative; width: 80px; height: 80px; }
+        
+        /* 2. ANIMATED AVATAR WRAPPER */
+        .avatar-wrapper { 
+            position: relative; 
+            width: 80px; 
+            height: 80px; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .avatar-wrapper:hover {
+            transform: scale(1.1) rotate(3deg);
+        }
+
         .avatar {
             width: 100%;
             height: 100%;
             border-radius: 18px; 
             object-fit: cover;
             filter: grayscale(20%); 
+            transition: filter 0.3s ease;
         }
+        .avatar-wrapper:hover .avatar { filter: grayscale(0%); }
+
         .status-dot {
             position: absolute; bottom: -2px; right: -2px;
             width: 16px; height: 16px;
             background-color: #238636; 
             border: 3px solid var(--bg-color);
             border-radius: 50%;
+            animation: pulse-dot 2s infinite; /* Added Pulse */
         }
+
+        @keyframes pulse-dot {
+            0% { box-shadow: 0 0 0 0 rgba(35, 134, 54, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(35, 134, 54, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(35, 134, 54, 0); }
+        }
+
         .name-info h1 {
             font-size: 1.5em;
             color: var(--text-primary);
@@ -171,13 +196,22 @@
         ul { list-style: none; }
         li { margin-bottom: 15px; }
 
+        /* Stack Row Hover Animation */
         .stack-row {
             display: flex;
             justify-content: space-between;
             border-bottom: 1px dashed var(--border-color);
             padding: 8px 0;
             color: var(--text-secondary);
+            transition: padding 0.2s ease, background 0.2s ease;
         }
+        .stack-row:hover {
+            padding-left: 10px;
+            padding-right: 10px;
+            background: var(--quote-bg);
+            border-radius: 4px;
+        }
+
         .stack-row span:first-child { color: var(--text-primary); }
         
         .work-item { display: flex; justify-content: space-between; align-items: baseline; }
@@ -196,7 +230,13 @@
             padding: 15px; 
             border-radius: 6px; 
             background: var(--bg-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
+        .github-graph:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+        }
+
         .graph-img {
             width: 100%;
             opacity: 0.8;
@@ -221,15 +261,15 @@
             color: var(--text-primary); 
             border-bottom-color: transparent;
             background-color: var(--card-hover);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateX(5px); /* Changed from translateY to X for list feel */
         }
         .social-left { display: flex; align-items: center; gap: 12px; font-size: 1em; }
         .social-right { display: flex; align-items: center; gap: 10px; font-size: 0.9em; color: var(--text-secondary); }
         .social-row:hover .social-right { color: var(--text-primary); }
 
         svg { width: 18px; height: 18px; fill: currentColor; }
-        .arrow-icon { width: 14px; height: 14px; transform: rotate(-45deg); }
+        .arrow-icon { width: 14px; height: 14px; transform: rotate(-45deg); transition: transform 0.2s; }
+        .social-row:hover .arrow-icon { transform: rotate(0deg); }
 
         .movie-row {
             display: flex; 
@@ -239,7 +279,7 @@
             border-bottom: 1px dashed var(--border-color);
             transition: 0.2s;
         }
-        .movie-row:hover { background-color: var(--quote-bg); padding-left: 10px; border-radius: 4px;}
+        .movie-row:hover { background-color: var(--quote-bg); padding-left: 10px; border-radius: 4px; transform: scale(1.01); }
         .movie-rating { color: var(--accent-color); font-size: 0.9em; letter-spacing: 1px; }
 
         .blog-toast {
@@ -267,7 +307,7 @@
 </head>
 <body>
 
-    <div class="top-bar">
+    <div class="top-bar" data-aos="fade-down" data-aos-duration="800">
         <div>
             <span>EST. 2003</span> <br>
             <span style="font-size: 0.9em; opacity: 0.7;">Dhaka, BD</span>
@@ -283,11 +323,11 @@
         </div>
     </div>
 
-    <div class="quote-box">
+    <div class="quote-box" data-aos="fade-in" data-aos-delay="200">
         <span id="quote-text"></span><span class="cursor quote-cursor"></span>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container" data-aos="fade-up" data-aos-delay="100">
         <div class="avatar-wrapper">
             <img src="profile.webp" alt="Sohrab" class="avatar">
             <div class="status-dot"></div> 
@@ -304,10 +344,10 @@
         </div>
     </div>
 
-    <section>
+    <section data-aos="fade-up">
         <h2>01. About</h2>
         <p>
-            CSE Student & Backend Engineer.I build scalable systems using Python and C.
+            CSE Student & Backend Engineer. I build scalable systems using Python and C.
             Currently focused on Data Structures and Cloud Architecture.
         </p>
         <a href="resume.pdf" target="_blank" class="resume-link">
@@ -315,7 +355,7 @@
         </a>
     </section>
 
-    <section>
+    <section data-aos="fade-up">
         <h2>02. Stack</h2>
         <div class="stack-list">
             <div class="stack-row"><span>Python</span><span>Django, FastAPI</span></div>
@@ -324,7 +364,7 @@
         </div>
     </section>
 
-    <section>
+    <section data-aos="fade-up">
         <h2>03. Learning</h2>
         
         <div class="work-item">
@@ -344,7 +384,7 @@
         </p>
     </section>
 
-    <section>
+    <section data-aos="fade-up">
         <h2>04. Work</h2>
         <ul>
             <li>
@@ -368,7 +408,7 @@
         </ul>
     </section>
 
-    <section>
+    <section data-aos="fade-up">
         <h2>05. Media Log (2026)</h2>
         <div style="font-size: 0.85em; color: var(--text-secondary); margin-bottom: 10px;">
             // TRACKING ANIMATION FILMS
@@ -406,7 +446,7 @@
 
     </section>
 
-    <section>
+    <section data-aos="zoom-in-up">
         <h2>// GITHUB ACTIVITY</h2>
         <div class="github-graph">
             <img src="https://ghchart.rshah.org/238636/Sohrabrayhan" alt="Sohrab's Github Chart" class="graph-img">
@@ -417,23 +457,23 @@
     </section>
 
     <section class="contact-section" style="margin-top: 80px; margin-bottom: 40px;">
-        <a href="mailto:sohrabrayhan45@gmail.com" class="social-row">
+        <a href="mailto:sohrabrayhan45@gmail.com" class="social-row" data-aos="fade-right" data-aos-delay="100">
             <div class="social-left"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><span>Email</span></div>
             <div class="social-right">sohrabrayhan45@gmail.com <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
         </a>
-        <a href="https://github.com/Sohrabrayhan" target="_blank" class="social-row">
+        <a href="https://github.com/Sohrabrayhan" target="_blank" class="social-row" data-aos="fade-right" data-aos-delay="200">
             <div class="social-left"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><span>GitHub</span></div>
             <div class="social-right">@Sohrabrayhan <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
         </a>
-        <a href="https://www.linkedin.com/in/sohrab-rayhan/" target="_blank" class="social-row">
+        <a href="https://www.linkedin.com/in/sohrab-rayhan/" target="_blank" class="social-row" data-aos="fade-right" data-aos-delay="300">
             <div class="social-left"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg><span>LinkedIn</span></div>
             <div class="social-right">@sohrab-rayhan <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
         </a>
-        <a href="blog.html" class="social-row">
+        <a href="blog.html" class="social-row" data-aos="fade-right" data-aos-delay="400">
             <div class="social-left"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg><span>Blog</span></div>
             <div class="social-right">/posts <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg></div>
         </a>
-        <div style="margin-top: 50px; text-align: center; color: var(--text-secondary); font-size: 0.8em;">
+        <div style="margin-top: 50px; text-align: center; color: var(--text-secondary); font-size: 0.8em;" data-aos="fade-in" data-aos-duration="1500">
             <span id="latency">Latency: --ms</span> • © 2026 SOHRAB RAYHAN
         </div>
     </section>
@@ -447,6 +487,15 @@
             <a href="blog.html" class="toast-btn">Read entry_01.txt &rarr;</a>
         </div>
     </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true, /* Animations happen only once (no repetitive fade in/out) */
+            duration: 800, /* Speed of animation */
+            offset: 50 /* Trigger animation 50px before element is visible */
+        });
+    </script>
 
     <script>
         
